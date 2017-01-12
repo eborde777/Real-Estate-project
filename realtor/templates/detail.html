@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Buying Details
+{% endblock %}
+
+{% block carousel %}
+<br/>
+<div class="container ">
+    <div class="row">
+    <div class="col-md-12">
+     {% if queryset.image %}
+     <img src="{{ queryset.image.url }}" class="img-responsive"/>
+     {% endif %}
+     <h1>Owner: {{ queryset.owner_name }}</h1>
+     <h2>Price: $ {{ queryset.price }}</h2>
+    <p> Overview: {{ queryset.overview }}</p>
+     <!--<h4> Address: {{ query.address}}, {{ query.city }}, {{ query.state }}, {{ query.zipcode }}</h4>-->
+    <!--<h3>Bed : {{ query.bedroom }} | Bath: {{ query.bathroom }} | Sq.Ft. {{ query.square_feet }}</h3>-->
+     <!--<p>Posted:{{ query.timestamp }}</p>-->
+
+
+        </div>
+     </div>
+</div>
+{% endblock %}
+
+{% block marketing %}
+<div class="container">
+</div>
+{% endblock %}

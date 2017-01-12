@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Create Posts
+{% endblock %}
+
+{% block carousel %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"><h1> Create Listing </h1></div>
+
+
+<div class="col-md-6">
+<form method="POST" action=" " enctype="multipart/form-data"> {% csrf_token %}
+    {{ form|crispy }}
+<input type="submit" value="Post">
+</form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock carousel %}
+
+{% block marketing %}
+
+{% endblock %}
+
+{% block footer %}
+<div class="row">
+<div class="col-md-12">
+    {{ block.super }}
+</div>
+    </div>
+
+{% endblock footer%}
+
+
+
+
