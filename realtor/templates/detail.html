@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %}
 Buying Details
@@ -6,6 +7,18 @@ Buying Details
 
 {% block carousel %}
 <br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2" style="text-align: center">
+            {% if messages %}
+                {% for message in messages %}
+                <p class="bg-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 <div class="container ">
     <div class="row">
     <div class="col-md-12">
@@ -14,7 +27,7 @@ Buying Details
      {% endif %}
      <h1>Owner: {{ queryset.owner_name }}</h1>
      <h2>Price: $ {{ queryset.price }}</h2>
-    <p> Overview: {{ queryset.overview }}</p>
+    <p> <h4><strong>Overview:</strong></h4>  {{ queryset.overview }}</p>
      <!--<h4> Address: {{ query.address}}, {{ query.city }}, {{ query.state }}, {{ query.zipcode }}</h4>-->
     <!--<h3>Bed : {{ query.bedroom }} | Bath: {{ query.bathroom }} | Sq.Ft. {{ query.square_feet }}</h3>-->
      <!--<p>Posted:{{ query.timestamp }}</p>-->
@@ -27,5 +40,6 @@ Buying Details
 
 {% block marketing %}
 <div class="container">
+
 </div>
 {% endblock %}

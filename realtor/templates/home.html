@@ -1,49 +1,99 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %}
 Buying List
 {% endblock %}
 
+{% block search %}
+<div class="container">
+<form method="GET" action="">
+    <div class="col-md-6 col-md-offset-2 ">
+        <input class="form-control col-10" type="text" name = 'search_query' placeholder="Enter City, State or ZipCode" value="{{ request.GET.search_query }}"/>
+    </div>
+    <div class="col-md-1" >
+        <button class="btn btn-default btn-md" type="submit">Search <span class="glyphicon glyphicon-search"></span></button>
+    </div>
+</form>
+    </div>
+{% endblock search %}
+
 {% block carousel %}
 <br/>
-<div class="container" >
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2" style="text-align: center">
+            {% if messages %}
+                {% for message in messages %}
+                <p class="bg-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
 
-{% for query in queryset %}
+<div class="container ">
+    {% for query in object_list %}
 <div class="row">
   <div class="col-sm-11">
     <div class="thumbnail">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-5" style="margin-top: 3px;">
       {% if query.image %}
       <img src="{{ query.image.url }}" class="img-responsive" alt="Post">
       {% endif %}
           </div>
-        <div class="col-sm-8" >
+        <div class="col-sm-5" >
       <div class="caption">
         <h3><a href="{{ query.get_absolute_url }}" >Owner: {{ query.owner_name }}</a><br/><small>Posted:{{ query.timestamp }}</small></h3>
-        <h4>Price: $ {{ query.price }}</h4>
+        <h4>Price: $ {{ query.price|intcomma }}</h4>
           <h5>Address: {{ query.address}}, {{ query.city }}, {{ query.state }}, {{ query.zipcode }}</h5>
-          <p>Bed : {{ query.bedroom }} | Bath: {{ query.bathroom }} | Sq.Ft. {{ query.square_feet }}</p>
-        <p><a href="{{ query.get_absolute_url }}" class="btn btn-primary" role="button">View</a> </p>
+          <p>Bed : {{ query.bedroom }} | Bath: {{ query.bathroom }} | Sq.Ft. {{ query.square_feet|intcomma }}</p>
+        <p><a href="{{ query.get_absolute_url }}"> <button class="btn btn-primary" role="button">View</button></a> </p>
+
         </div>
       </div>
-    </div>
-  </div>
-    </div>
+          {% if request.user.is_superuser or request.user.is_staff %}
+              <div class="col-sm-1" style="margin-top: 30px; margin-right: 20px;">
+               <a href="{% url 'buy:update' query.id %}" ><button class="btn btn-success">Update</button></a>
+              </div>
 
+               <div class="col-sm-1" style="margin-top: 30px;" >
+                <a href="{% url 'buy:delete' query.id %}"> <button class="btn btn-danger">Delete</button> </a>
+              </div>
+        </div>
+        {% endif %}
+  </div>
+      <hr/>
     </div>
-  <hr/>
+ <!--<hr/>-->
+    </div>
     <!--{% cycle "" " <div class='col-sm-12'><hr/></div> </div> <div class='row'> " %}-->
     {% endfor %}
 
-</div>
-{% endblock %}
+<div class="pagination" style="margin-left:43%;"  >
+    <ul class="pagination nav navbar-nav align-right">
+    {% if object_list.has_previous %}
+            <li><a href="?page={{ object_list.previous_page_number }} {% if request.GET.search_query %}
+            &search_query={{ request.GET.search_query }} {% endif %}">Prev</a></li>
+    {% endif %}
+    {% for page in object_list.paginator.page_range %}
+        <li class="{% if object_list.number == page  %}active{% endif %}"><a href="?page={{ page }} {% if request.GET.search_query %}
+            &search_query={{ request.GET.search_query }} {% endif %}">{{ page }}</a></li>
+    {% endfor %}
 
+    {% if object_list.has_next %}
+        <li> <a href="?page={{ object_list.next_page_number }}{% if request.GET.search_query %}
+            &search_query={{ request.GET.search_query }} {% endif %}">Next</a></li>
+    {% endif %}
+
+    </ul>
+</div>
+
+{% endblock %}
 
 {% block marketing %}
 <div class="container">
+
 </div>
 {% endblock %}
-
-
-

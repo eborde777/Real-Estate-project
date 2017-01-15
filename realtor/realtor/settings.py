@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'crispy_forms',
     'buy',
 ]
@@ -130,4 +131,8 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_root')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_root')
 
-USE_THOUSAND_SEPARATOR = True
+# adding , at thousand place in currency
+# USE_THOUSAND_SEPARATOR = True
+
+# Crispy forms tags settings
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -7,35 +7,36 @@ Create Posts
 
 {% block carousel %}
 
-<div class="container">
+<div class="container" >
     <div class="row">
-        <div class="col-md-4"><h1> Create Listing </h1></div>
+<div class="col-md-6 col-md-offset-4 col-xs-3">
+        <div ><h1> Create Listing </h1></div>
+</div>
 
-
-<div class="col-md-6">
+<div class="col-md-6 col-md-offset-3 col-xs-3">
 <form method="POST" action=" " enctype="multipart/form-data"> {% csrf_token %}
     {{ form|crispy }}
-<input type="submit" value="Post">
+<div class="row">
+    <div class="col-md-6 col-md-offset-4 col-xs-3">
+        <button type="submit" class="btn btn-success btn btn-primary col-md-6">Save</button>
+    </div>
+</div>
 </form>
         </div>
     </div>
 </div>
 
-
 {% endblock carousel %}
 
 {% block marketing %}
+<div class="container">
 
+</div>
 {% endblock %}
 
-{% block footer %}
-<div class="row">
-<div class="col-md-12">
-    {{ block.super }}
-</div>
-    </div>
 
-{% endblock footer%}
+
+
 
 
 
