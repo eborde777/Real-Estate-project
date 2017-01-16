@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'crispy_forms',
     'buy',
+    'contact',
 ]
 
 MIDDLEWARE = [

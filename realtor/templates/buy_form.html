@@ -9,11 +9,19 @@ Create Posts
 
 <div class="container" >
     <div class="row">
-<div class="col-md-6 col-md-offset-4 col-xs-3">
+<div class="col-md-6 col-md-offset-4 col-xs-6">
         <div ><h1> Create Listing </h1></div>
 </div>
 
-<div class="col-md-6 col-md-offset-3 col-xs-3">
+<div class="col-md-6 col-md-offset-3 col-xs-8">
+<hr/>
+</div>
+
+<div class="col-md-6 col-md-offset-4 col-xs-7">
+    <p style="color: #444444">' * ' All Fields are mandatory</p>
+</div>
+
+<div class="col-md-6 col-md-offset-3 col-xs-8">
 <form method="POST" action=" " enctype="multipart/form-data"> {% csrf_token %}
     {{ form|crispy }}
 <div class="row">
@@ -30,11 +38,15 @@ Create Posts
 
 {% block marketing %}
 <div class="container">
-
+<div class="row">
+    <div class="col-md-9 col-md-offset-2 col-xs-8">
+<hr/>
+</div>
+</div>
 </div>
 {% endblock %}
-
-
+<br/><br/><br/><br/><br/>
+{% block
 
 
 

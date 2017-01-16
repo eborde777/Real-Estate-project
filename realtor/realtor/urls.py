@@ -21,6 +21,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('buy.urls')),
+    url(r'^contact/', include('contact.urls')),
 ]
 
 if settings.DEBUG:
